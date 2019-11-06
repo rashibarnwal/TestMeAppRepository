@@ -1,6 +1,6 @@
 Feature: Perform Multiple User Login
 Scenario Outline:  Use DataTable for TestMeApp
-#Behavior of the scenario
+Behavior of the scenario
 Given The URL of the TestMeApp "http://10.232.237.143:443/TestMeApp/login.htm"
 When User enters <username> as <usertype> username
 And User enters <password> as password

@@ -3,15 +3,16 @@ package cucumberpkg;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
+
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import junit.framework.Assert;
+
 public class TestMeApp {
 	WebDriver driver;
-
 	@Given("The URL of the TestMeApp {string}")
 	public void the_URL_of_the_TestMeApp() {
 		System.setProperty("webdriver.chrome.driver",
@@ -28,7 +29,7 @@ public class TestMeApp {
 		driver.findElement(By.id("userName")).sendKeys(username);
 
 	}
-	@When("User enters {} as password")
+	@When("User enters {word} as password")
 	public void user_enters_password_as_password(String password) {
 		driver.findElement(By.id("password")).sendKeys(password);
 	}
@@ -41,9 +42,14 @@ public class TestMeApp {
 
 	@Then("User is in valid page")
 	public void user_is_in_valid_page() {
-		String user = driver.findElement(By.xpath("//i[@class='fa fa-lock']")).getText();
-		System.out.println("User is in the valid page.");
-		Assert.assertEquals("SignOut", user);
+		//String user = driver.findElement(By.xpath("//i[@class='fa fa-lock']")).getText();
+		//System.out.println("User is in the valid page.");
+		//Assert.assertEquals("SignOut", user);
+		String title = driver.getTitle();
+		System.out.println("Title of the page is " + title);
+		Assert.assertTrue(driver.findElement(By.linkText("SignOut")).isDisplayed());
+		driver.findElement(By.linkText("SignOut")).click();
+		driver.close();
 
 	}
 }
